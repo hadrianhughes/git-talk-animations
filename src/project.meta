@@ -3,12 +3,12 @@
   "shared": {
     "background": null,
     "range": [
-      0,
+      2.099999,
       null
     ],
     "size": {
-      "x": 1920,
-      "y": 1080
+      "x": 320,
+      "y": 120
     },
     "audioOffset": 0
   },
