@@ -42,9 +42,9 @@ export class Terminal extends Node {
         gap={10}
       >
         <Layout width="100%" gap={5}>
-          <Circle fill={colors.red} size={[20,20]} />
-          <Circle fill={colors.amber} size={[20,20]} />
-          <Circle fill={colors.green} size={[20,20]} />
+          <Circle fill={colors.red} size={[15,15]} />
+          <Circle fill={colors.amber} size={[15,15]} />
+          <Circle fill={colors.green} size={[15,15]} />
         </Layout>
         <Layout width="100%" wrap="wrap">
           {props.children}
