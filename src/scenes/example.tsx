@@ -9,7 +9,7 @@ export default makeScene2D(function* (view) {
   const terminal = createRef<Terminal>();
 
   view.add(
-    <Terminal width={300} height={200}>
+    <Terminal width={300} height={120}>
       <GitLine operation="pick" operand="0e33fa21 new feature" />
       <GitLine operation="pick" operand="61ab2fcc debug" />
       <GitLine operation="pick" operand="b2cd143a refactor" />
