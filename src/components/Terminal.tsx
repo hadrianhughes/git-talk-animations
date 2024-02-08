@@ -1,5 +1,5 @@
-import { createRef } from '@motion-canvas/core';
-import { Circle, Node, NodeProps, Rect, signal } from '@motion-canvas/2d';
+import { createRef, SignalValue } from '@motion-canvas/core';
+import { Circle, ComponentChildren, Layout, Node, NodeProps, Rect, signal } from '@motion-canvas/2d';
 
 const colors = {
   background: '#3b3a3d',
@@ -35,15 +35,20 @@ export class Terminal extends Node {
         size={[this.width, this.height]}
         fill={colors.background}
         layout
+        wrap="wrap"
         justifyContent="start"
-        alignItems="start"
+        alignContent="start"
         padding={10}
+        gap={10}
       >
-        <Node>
-          <Circle fill={colors.red} size={[20,20]} margin={[0,5,0,0]} />
-          <Circle fill={colors.amber} size={[20,20]} margin={[0,5,0,0]} />
+        <Layout width="100%" gap={5}>
+          <Circle fill={colors.red} size={[20,20]} />
+          <Circle fill={colors.amber} size={[20,20]} />
           <Circle fill={colors.green} size={[20,20]} />
-        </Node>
+        </Layout>
+        <Layout width="100%" wrap="wrap">
+          {props.children}
+        </Layout>
       </Rect>
     );
   }
