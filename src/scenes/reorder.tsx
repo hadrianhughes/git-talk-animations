@@ -1,9 +1,11 @@
 import { Circle, makeScene2D, Layout, Txt } from '@motion-canvas/2d';
-import { all, createRef } from '@motion-canvas/core';
+import { all, createRef, map, tween, waitFor } from '@motion-canvas/core';
 import { Terminal } from '../components/Terminal';
 import { GitLine } from '../components/GitLine';
 
 const LINE_HEIGHT = 22;
+const TIMING = 0.333;
+const INTERVAL = 0.2;
 
 export default makeScene2D(function* (view) {
   // Create your animations here
@@ -21,23 +23,31 @@ export default makeScene2D(function* (view) {
     </Terminal>
   );
 
-  yield* all(
-    line1().position.y(LINE_HEIGHT, 1),
-    line2().position.y(-LINE_HEIGHT, 1),
-  );
+  yield* tween(TIMING, value => {
+    line1().position.y(map(0, LINE_HEIGHT, value));
+    line2().position.y(map(0, -LINE_HEIGHT, value));
+  });
 
-  yield* all(
-    line1().position.y(LINE_HEIGHT * 2, 1),
-    line3().position.y(-LINE_HEIGHT, 1)
-  );
+  yield* waitFor(INTERVAL);
 
-  yield* all(
-    line1().position.y(0, 1),
-    line2().position.y(LINE_HEIGHT, 1)
-  );
+  yield* tween(TIMING, value => {
+    line1().position.y(map(LINE_HEIGHT, LINE_HEIGHT * 2, value));
+    line3().position.y(map(0, -LINE_HEIGHT, value));
+  });
 
-  yield* all(
-    line2().position.y(0, 1),
-    line3().position.y(0, 1),
-  );
+  yield* waitFor(INTERVAL);
+
+  yield* tween(TIMING, value => {
+    line1().position.y(map(LINE_HEIGHT * 2, 0, value));
+    line2().position.y(map(-LINE_HEIGHT, LINE_HEIGHT, value));
+  });
+
+  yield* waitFor(INTERVAL);
+
+  yield* tween(TIMING, value => {
+    line2().position.y(map(LINE_HEIGHT, 0, value));
+    line3().position.y(map(-LINE_HEIGHT, 0, value));
+  });
+
+  yield* waitFor(INTERVAL);
 });
